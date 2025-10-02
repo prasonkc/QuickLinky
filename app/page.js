@@ -14,7 +14,7 @@ export default function Home() {
         Transform long, messy links into neat, shareable URLs in seconds. Fast,
         simple, and free.
       </p>
-      <button onClick={() => {router.push("/generate")}} className="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-secondary transition-colors">
+      <button onClick={() => {router.push("/shorten")}} className="bg-primary text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-secondary transition-colors">
         Get Started
       </button>
     </div>

@@ -11,7 +11,7 @@ export default function About() {
         Short URL is a fast, simple, and free tool to shorten long links. Make your URLs easy to share, memorable, and neat in seconds.
       </p>
       <Link
-        href="/generate"
+        href="/shorten"
         className="bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors"
       >
         Generate a Short URL

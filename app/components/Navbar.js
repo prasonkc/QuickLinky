@@ -10,7 +10,7 @@ const Navbar = () => {
             <span className="ml-3 text-xl">ShortURL</span>
           </Link>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <Link className="mr-5 hover:text-white hover:border-b-2 border-foreground" href={"/generate"}>Shorten URL</Link>
+            <Link className="mr-5 hover:text-white hover:border-b-2 border-foreground" href={"/shorten"}>Shorten URL</Link>
             <Link className="mr-5 hover:text-white hover:border-b-2 border-foreground" href={"/about"}>About</Link>
           </nav>
         </div>
