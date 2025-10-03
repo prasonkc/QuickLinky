@@ -10,31 +10,27 @@ export default function URLShortener() {
   const [generated, setGenerated] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleGenerate = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ longurl: longURL, shorturl: shortURL }),
-      });
+  const handleGenerate = () => {
+    setLoading(true)
+    // API call
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ longurl: longURL, shorturl: shortURL }),
+      redirect: "follow",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setshortURL("");
+          setLongURL("");
+          setGenerated(`${window.location.origin}/url/${shortURL}`);
+        }
+        // console.log(data)
+      })
+      .catch((e) => console.log(e));
 
-      const data = await res.json();
-
-      if (data.success) {
-        // If backend returns data.shorturl, build the full URL
-        const finalUrl = `${window.location.origin}/url/${data.shorturl}`;
-        setGenerated(finalUrl);
-
-        // clear inputs
-        setShortURL("");
-        setLongURL("");
-      }
-    } catch (err) {
-      console.error("Error generating short URL:", err);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(false);
   };
 
   const handleCopy = () => {
