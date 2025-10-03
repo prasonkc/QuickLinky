@@ -2,14 +2,38 @@
 
 import { useState } from "react";
 
+const API_URL = "http://localhost:3000/api/generate";
+
 export default function URLShortener() {
   const [longURL, setLongURL] = useState("");
   const [shortURL, setshortURL] = useState("");
   const [generated, setGenerated] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleGenerate = () => {
-    // Placeholder for API call
-    alert(`Generating short URL for: ${longURL} with slug: ${shortURL}`);
+    // API call
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ longurl: longURL, shorturl: shortURL }),
+      redirect: "follow",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setshortURL("");
+          setLongURL("");
+          setGenerated(`${window.location.origin}/${shortURL}`);
+        }
+        // console.log(data)
+      })
+      .catch((e) => console.log(e));
+
+    setLoading(false);
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(generatedURL);
   };
 
   return (
@@ -43,10 +67,36 @@ export default function URLShortener() {
         {/* Button */}
         <button
           onClick={handleGenerate}
+          disabled={loading}
           className="w-full bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors"
         >
-          Generate Now
+          {loading ? "Generating..." : "Generate Now"}
         </button>
+
+        {generated && (
+          <div className="mt-6 p-6 bg-gradient-to-r from-green-400 via-green-500 to-green-600 rounded-2xl text-center shadow-lg">
+            <p className="text-white text-lg font-semibold mb-3">
+              🎉 Your Short URL is ready!
+            </p>
+
+            <div className="flex items-center justify-center bg-white rounded-lg px-4 py-3 shadow-inner">
+              <a
+                href={generated}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 font-medium underline break-all"
+              >
+                {generated}
+              </a>
+              <button
+                onClick={handleCopy}
+                className="ml-4 bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
