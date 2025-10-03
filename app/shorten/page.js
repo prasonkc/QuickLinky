@@ -11,6 +11,7 @@ export default function URLShortener() {
   const [loading, setLoading] = useState(false);
 
   const handleGenerate = () => {
+    setLoading(true)
     // API call
     fetch(API_URL, {
       method: "POST",
@@ -23,7 +24,7 @@ export default function URLShortener() {
         if (data.success) {
           setshortURL("");
           setLongURL("");
-          setGenerated(`${window.location.origin}/${shortURL}`);
+          setGenerated(`${window.location.origin}/url/${shortURL}`);
         }
         // console.log(data)
       })
@@ -84,7 +85,7 @@ export default function URLShortener() {
                 href={generated}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 font-medium underline break-all"
+                className="text-black font-medium underline break-all"
               >
                 {generated}
               </a>
