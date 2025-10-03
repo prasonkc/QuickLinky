@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import axios from 'axios';
 
 const API_URL = "/api/generate";
 
@@ -10,28 +11,54 @@ export default function URLShortener() {
   const [generated, setGenerated] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleGenerate = () => {
-    setLoading(true)
-    // API call
-    fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ longurl: longURL, shorturl: shortURL }),
-      redirect: "follow",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setshortURL("");
-          setLongURL("");
-          setGenerated(`${window.location.origin}/url/${shortURL}`);
-        }
-        // console.log(data)
-      })
-      .catch((e) => console.log(e));
+const handleGenerate = async () => {
+  setLoading(true);
+  
+  try {
+    const body = JSON.stringify({ longurl: longURL, shorturl: shortURL });
 
+    const res = await axios({
+      method: 'POST',
+      url: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/generate`,
+      data: body,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // Assuming your API responds with { success: true } on success
+    if (res.data.success) {
+      setshortURL("");
+      setLongURL("");
+      setGenerated(`${window.location.origin}/url/${shortURL}`);
+    }
+
+  } catch (error) {
+    console.log(error);
+  } finally {
     setLoading(false);
-  };
+  }
+
+  // fetch(API_URL, {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ longurl: longURL, shorturl: shortURL }),
+  //   redirect: "follow",
+  // })
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     if (data.success) {
+  //       setshortURL("");
+  //       setLongURL("");
+  //       setGenerated(`${window.location.origin}/url/${shortURL}`);
+  //     }
+  //     // console.log(data)
+  //   })
+  //   .catch((e) => console.log(e));
+
+  // setLoading(false);
+};
+
 
   const handleCopy = () => {
     navigator.clipboard.writeText(generatedURL);
