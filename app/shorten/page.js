@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const API_URL = "https://short-url-eong.vercel.app/api/generate";
+const API_URL = "http://localhost:3000/api/generate";
 
 export default function URLShortener() {
   const [longURL, setLongURL] = useState("");
