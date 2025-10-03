@@ -1,4 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🔗 Short URL
+
+A fast, simple, and free URL shortener built with **Next.js 13+ (App Router)** and **MongoDB**.  
+This app lets you generate custom short links that are easy to share, remember, and manage.
+
+---
+
+## ✨ Features
+- Shorten long URLs instantly  
+- Choose your own custom short URL  
+- Copy to clipboard with one click  
+- Responsive design (mobile + desktop)  
+- Stores shortened URLs in MongoDB for persistence  
+- Built with **Next.js**, **Tailwind CSS**, and **MongoDB**
+
+## Find the deployed project at: 
 
 ## Getting Started
 
