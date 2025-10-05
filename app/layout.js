@@ -10,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Short URL",
+  title: "QuickLinky - Shorten Your URL",
   description: "The best URL Shortner",
 };
 
