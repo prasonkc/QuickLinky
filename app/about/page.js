@@ -6,7 +6,7 @@ export default function About() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 bg-background text-foreground text-center">
       <h1 className="text-4xl sm:text-5xl font-extrabold mb-6">
-        About <span className="text-primary">QuickLinky - Shorten your URL</span>
+        About <span className="text-primary">QuickLinky</span> - Shorten your URL
       </h1>
 
       <p className="max-w-lg text-lg sm:text-xl text-muted-foreground mb-6">
